@@ -9,8 +9,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
   />
 </head>
-<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4" style="background-image: url('https://storage.googleapis.com/a1aa/image/89c3b8d3-c135-4ecb-844b-59110195a649.jpg'); background-size: cover; background-position: center;">
-  <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow-lg max-w-md w-full p-6 text-gray-900 font-sans space-y-6">
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4 relative" style="background-image: url('https://storage.googleapis.com/a1aa/image/89c3b8d3-c135-4ecb-844b-59110195a649.jpg'); background-size: cover; background-position: center;">
+  <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow-lg max-w-md w-full p-6 text-gray-900 font-sans space-y-6 z-10 relative">
     <h1 class="text-3xl font-extrabold text-center mb-4 text-red-600">💥PROMO💥</h1>
     <ul class="text-lg font-semibold space-y-2">
       <li>7 HARI = 10.000</li>
@@ -69,11 +69,25 @@
     </div>
   </div>
 
+  <!-- Popup Overlay -->
+  <div id="popupOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-20">
+    <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6 relative">
+      <button id="closePopup" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl font-bold">&times;</button>
+      <h2 class="text-xl font-bold mb-4 text-center text-blue-800">Gabung Saluran WhatsApp Kami!</h2>
+      <p class="mb-4 text-center text-blue-700">Dapatkan update terbaru dan promo menarik langsung di saluran WhatsApp kami.</p>
+      <div class="text-center">
+        <a href="https://whatsapp.com/channel/0029VbAuluK4CrfgyQhHXp45" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded transition-colors duration-300">
+          Join Sekarang
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
     const promoCodes = {
-      "DISKON10": 0.1,  // 10% discount
-      "PROMO20": 0.2,  // 20% discount
-      "SALE30": 0.3    // 30% discount
+      "DISKON10": 0.2,  // 10% discount
+      "PROMO20": 0.1,  // 20% discount
+      "SALE30": 0.5    // 30% discount
     };
 
     const productSelect = document.getElementById('product');
@@ -91,7 +105,7 @@
       let price = parseInt(selectedOption.dataset.price, 10);
       const promoCode = promoInput.value.trim().toUpperCase();
 
-      if (promoCode === "AKUBELI123") {
+      if (promoCode === "7Gh6y8") {
         // Special promo: fixed price 5000, no message shown
         const discountedPrice = 5000;
         totalPriceEl.textContent = discountedPrice.toLocaleString('id-ID');
@@ -128,11 +142,11 @@
       const promoCode = promoCodeRaw.toUpperCase();
       let message = '';
       if (promoCode === "AKUBELI123") {
-        message = `Halo Admin, saya ingin memesan produk dengan durasi: ${productOption.value} dan menggunakan kode promo potong harga 5.000`;
+        message = `Halo Admin, saya ingin memesan sewa bot whatsapp dengan durasi: ${productOption.value} dan menggunakan kode promo potong harga 5.000`;
       } else if (promoCode && promoCodes[promoCode]) {
-        message = `Halo Admin, saya ingin memesan produk dengan durasi: ${productOption.value} dengan kode promo ${promoCodeRaw}`;
+        message = `Halo Admin, saya ingin memesan sewa bot whatsapp dengan durasi: ${productOption.value} dengan kode promo ${promoCodeRaw}`;
       } else {
-        message = `Halo Admin, saya ingin memesan produk dengan durasi: ${productOption.value}`;
+        message = `Halo Admin, saya ingin memesan sewa bot whatsapp dengan durasi: ${productOption.value}`;
       }
       const waNumber = '6285955201695';
       const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
@@ -141,6 +155,28 @@
 
     // Initialize total price on page load
     calculateTotal();
+
+    // Popup logic
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closePopupBtn = document.getElementById('closePopup');
+
+    // Show popup after 3 seconds
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        popupOverlay.classList.remove('hidden');
+      }, 3000);
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+      popupOverlay.classList.add('hidden');
+    });
+
+    // Optional: close popup when clicking outside the popup content
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.classList.add('hidden');
+      }
+    });
   </script>
 </body>
 </html>
